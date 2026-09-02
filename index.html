@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Mohammed Abzan — Administration, Airport Operations, Customer Service and Sustainability Coordination.">
+  <meta name="theme-color" content="#0a0b0b">
+  <title>MOHAMMED ABZAN — Operations × Administration</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#080909; --surface:#101212; --surface2:#151817; --text:#f3f4ef;
+      --muted:#9da49e; --line:rgba(255,255,255,.10); --accent:#b9ff4a;
+      --accent2:#d8ff9a; --radius:24px; --max:1240px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--bg)}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Manrope,system-ui,sans-serif;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px);background-size:100% 4px;opacity:.22}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
+    .mono{font:12px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.14em}
+    .muted{color:var(--muted)}
+    .accent{color:var(--accent)}
+    .progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:10001;box-shadow:0 0 20px var(--accent)}
+    #scene{position:fixed;inset:0;z-index:-2;opacity:.7}
+    .noise{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+
+    header{position:fixed;top:16px;left:50%;transform:translateX(-50%);width:min(calc(100% - 28px),1220px);z-index:1000}
+    .nav{height:64px;border:1px solid var(--line);background:rgba(8,9,9,.66);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 18px;border-radius:18px}
+    .brand{font-weight:800;letter-spacing:-.04em}.brand span{color:var(--accent)}
+    .navlinks{display:flex;gap:26px;font-size:13px;color:#c9cec9}
+    .navlinks a{transition:.25s}.navlinks a:hover{color:var(--accent)}
+    .navcta{display:flex;align-items:center;gap:8px}
+    .pill{border:1px solid var(--line);background:rgba(255,255,255,.04);color:#fff;border-radius:999px;padding:11px 15px;cursor:pointer;transition:.25s}
+    .pill:hover{border-color:rgba(185,255,74,.5);transform:translateY(-2px)}
+    .pill.primary{background:var(--accent);color:#0a0b0b;border-color:var(--accent);font-weight:800}
+    .menu{display:none}
+
+    main{position:relative}
+    section{padding:130px 0;position:relative}
+    .hero{min-height:100svh;padding-top:150px;display:flex;align-items:center}
+    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+    .eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 20px var(--accent)}
+    h1{font-size:clamp(58px,9.5vw,150px);line-height:.84;letter-spacing:-.075em;margin:0;max-width:900px}
+    .hero-sub{font-size:clamp(18px,2vw,25px);line-height:1.45;color:#c9cec9;max-width:700px;margin:34px 0}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-note{margin-top:28px;color:var(--muted);font-size:13px}
+    .photo-wrap{position:relative;aspect-ratio:1/1.15;border-radius:32px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(145deg,#1c211f,#0c0e0d);box-shadow:0 30px 90px rgba(0,0,0,.45)}
+    .photo-wrap:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55));z-index:1}
+    .photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 25%;filter:saturate(.9) contrast(1.04)}
+    .photo-tag{position:absolute;left:18px;bottom:18px;z-index:2;background:rgba(8,9,9,.72);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:15px;padding:12px 14px}
+    .float-badge{position:absolute;right:-18px;top:20%;background:var(--accent);color:#0a0b0b;border-radius:999px;padding:12px 16px;font-weight:800;transform:rotate(7deg);box-shadow:0 15px 50px rgba(185,255,74,.18)}
+
+    .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:18px 0}
+    .ticker-track{display:inline-flex;gap:36px;animation:marquee 24s linear infinite}
+    .ticker b{color:var(--accent);font-weight:500}
+    @keyframes marquee{to{transform:translateX(-50%)}}
+
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:50px}
+    .section-kicker{color:var(--accent)}
+    h2{font-size:clamp(42px,6vw,82px);line-height:.95;letter-spacing:-.06em;margin:10px 0 0;max-width:800px}
+    .section-intro{max-width:430px;color:var(--muted);line-height:1.7;font-size:15px}
+
+    .bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+    .card{background:rgba(16,18,18,.78);border:1px solid var(--line);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden;transition:transform .35s,border-color .35s,background .35s}
+    .card:hover{transform:translateY(-6px);border-color:rgba(185,255,74,.32);background:rgba(19,22,21,.9)}
+    .card:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:var(--accent);filter:blur(90px);opacity:.05;right:-80px;top:-80px;pointer-events:none}
+    .bigstat{grid-column:span 4;min-height:220px}.wide{grid-column:span 8;min-height:220px}.full{grid-column:1/-1}
+    .number{font-size:70px;letter-spacing:-.08em;font-weight:800;line-height:1}.card-title{margin-top:22px;font-weight:800;font-size:18px}.card p{color:var(--muted);line-height:1.65;font-size:14px}
+
+    .timeline{position:relative}
+    .timeline:before{content:"";position:absolute;left:15px;top:0;bottom:0;width:1px;background:var(--line)}
+    .job{display:grid;grid-template-columns:55px 1fr;gap:25px;margin-bottom:18px}
+    .job-dot{width:31px;height:31px;border-radius:50%;background:var(--bg);border:1px solid rgba(185,255,74,.55);display:grid;place-items:center;position:relative;z-index:2}
+    .job-dot:after{content:"";width:9px;height:9px;border-radius:50%;background:var(--accent)}
+    .job-card{padding:30px}
+    .job-top{display:flex;justify-content:space-between;gap:20px;align-items:start}
+    .job h3{font-size:30px;letter-spacing:-.04em;margin:0 0 7px}
+    .job ul{margin:24px 0 0;padding-left:20px;color:#c4c9c4;line-height:1.8}
+    .job li{margin:8px 0}.date{color:var(--accent);white-space:nowrap}
+
+    .ops{display:grid;grid-template-columns:.75fr 1.25fr;gap:18px}
+    .ops-copy{min-height:470px;display:flex;flex-direction:column;justify-content:space-between}
+    .ops-map{min-height:470px;position:relative;background:radial-gradient(circle at 50% 45%,rgba(185,255,74,.10),transparent 38%),#0b0d0c}
+    .orbit{position:absolute;inset:13%;border:1px dashed rgba(185,255,74,.22);border-radius:50%;animation:spin 18s linear infinite}
+    .orbit.two{inset:25%;animation-duration:12s;animation-direction:reverse}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .node{position:absolute;transform:translate(-50%,-50%);background:#0e1110;border:1px solid rgba(185,255,74,.35);padding:13px 16px;border-radius:14px;font-size:12px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+    .node b{display:block;color:var(--accent);margin-bottom:4px;font-size:11px}
+    .n1{left:50%;top:50%}.n2{left:50%;top:8%}.n3{left:92%;top:50%}.n4{left:50%;top:92%}.n5{left:8%;top:50%}
+
+    .skills{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .skill{min-height:180px}.skill h3{font-size:22px;margin:0 0 10px;letter-spacing:-.04em}.skill p{margin:0}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.tag{padding:8px 10px;border:1px solid var(--line);border-radius:999px;color:#cdd2cd;font-size:12px;background:rgba(255,255,255,.025)}
+
+    .languages{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+    .lang{padding:22px;border:1px solid var(--line);border-radius:18px;background:rgba(16,18,18,.75);min-height:120px;display:flex;flex-direction:column;justify-content:space-between}
+    .lang strong{font-size:17px}.lang span{font:11px "DM Mono";color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+
+    .education{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .edu h3{font-size:25px;letter-spacing:-.04em;margin:10px 0}.edu .year{color:var(--accent);font:12px "DM Mono";letter-spacing:.1em}
+    .certs{display:grid;gap:8px;margin-top:22px}.cert{padding:12px 0;border-top:1px solid var(--line);font-size:13px;color:#c9cec9}
+
+    .contact{min-height:80vh;display:flex;align-items:center}
+    .contact-box{border:1px solid rgba(185,255,74,.25);border-radius:36px;padding:clamp(30px,6vw,80px);background:radial-gradient(circle at 80% 20%,rgba(185,255,74,.09),transparent 30%),rgba(16,18,18,.78);position:relative;overflow:hidden}
+    .contact-box h2{max-width:900px}.contact-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:35px}
+    footer{border-top:1px solid var(--line);padding:35px 0 45px}.foot{display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:12px}
+
+    .reveal{opacity:0;transform:translateY(35px)}
+    .cursor{position:fixed;width:12px;height:12px;border-radius:50%;background:var(--accent);pointer-events:none;z-index:10002;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+    .cursor-ring{position:fixed;width:42px;height:42px;border:1px solid rgba(185,255,74,.55);border-radius:50%;pointer-events:none;z-index:10001;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
+    .cursor.hover{width:20px;height:20px}.cursor-ring.hover{width:64px;height:64px;background:rgba(185,255,74,.05)}
+
+    @media(max-width:850px){
+      header{top:10px}.nav{height:58px}.navlinks,.navcta .secondary{display:none}.menu{display:block}
+      .hero{padding-top:120px}.hero-grid{grid-template-columns:1fr;gap:35px}.photo-wrap{max-width:520px;margin:auto;width:100%}
+      .float-badge{right:8px}.bento,.skills,.education,.ops{grid-template-columns:1fr}.bigstat,.wide,.full{grid-column:auto}
+      .languages{grid-template-columns:repeat(2,1fr)}.section-head{display:block}.section-intro{margin-top:18px}
+      .job-top{display:block}.date{display:block;margin-top:10px}.job h3{font-size:25px}
+      .cursor,.cursor-ring{display:none}
+    }
+    @media(max-width:520px){
+      .wrap{width:min(calc(100% - 24px),var(--max))}.hero{padding-top:105px}
+      h1{font-size:clamp(55px,18vw,88px)}section{padding:95px 0}
+      .card{padding:22px}.bigstat{min-height:170px}.number{font-size:55px}
+      .languages{grid-template-columns:1fr 1fr}.ops-copy,.ops-map{min-height:400px}.node{font-size:10px;padding:9px 10px}
+      .foot{display:block}.foot div+div{margin-top:12px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}.ticker-track,.orbit{animation:none!important}.reveal{opacity:1!important;transform:none!important}
+    }
+  </style>
+</head>
+<body>
+  <div class="progress"></div>
+  <div id="scene"></div><div class="noise"></div>
+  <div class="cursor"></div><div class="cursor-ring"></div>
+
+  <header>
+    <nav class="nav">
+      <a class="brand" href="#top">ABZAN<span>•</span></a>
+      <div class="navlinks">
+        <a href="#about">About</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#education">Education</a>
+      </div>
+      <div class="navcta">
+        <a class="pill secondary" href="assets/Abzan_Resume.pdf" target="_blank" rel="noopener">View CV ↗</a>
+        <a class="pill primary" href="#contact">Let's talk</a>
+        <button class="pill menu" aria-label="Open menu">Menu</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow mono reveal"><span class="dot"></span> Dubai · UAE · Available for opportunities</div>
+          <h1 class="reveal">MOHAMMED<br><span class="accent">ABZAN.</span></h1>
+          <p class="hero-sub reveal">Administration, airport operations and customer service — with a growing edge in <span class="accent">AI, data and business.</span></p>
+          <div class="hero-actions reveal">
+            <a class="pill primary magnetic" href="#experience">Explore my journey ↓</a>
+            <a class="pill magnetic" href="mailto:mohdabzan2003@gmail.com">Email me ↗</a>
+          </div>
+          <div class="hero-note mono reveal">Currently pursuing an MBA in Business Administration</div>
+        </div>
+
+        <div class="photo-wrap reveal">
+          <img src="assets/abzan-photo.jpeg" alt="Mohammed Abzan">
+          <div class="photo-tag"><div class="mono">Mohammed Abzan</div><div class="muted" style="margin-top:5px;font-size:12px">Operations × Administration</div></div>
+          <div class="float-badge">OPEN TO GROWTH ↗</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker">
+      <div class="ticker-track">
+        <span>ADMINISTRATION <b>✦</b></span><span>CARGO OPERATIONS <b>✦</b></span><span>CUSTOMER SERVICE <b>✦</b></span><span>DATA & REPORTING <b>✦</b></span><span>SUSTAINABILITY <b>✦</b></span><span>AI & BUSINESS <b>✦</b></span>
+        <span>ADMINISTRATION <b>✦</b></span><span>CARGO OPERATIONS <b>✦</b></span><span>CUSTOMER SERVICE <b>✦</b></span><span>DATA & REPORTING <b>✦</b></span><span>SUSTAINABILITY <b>✦</b></span><span>AI & BUSINESS <b>✦</b></span>
+      </div>
+    </div>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="section-kicker mono">01 / Profile</div><h2>Built for fast-moving operations.</h2></div>
+          <p class="section-intro">Administration and customer service professional with over two years of experience at dnata (Emirates Group), Dubai International Airport, across cargo operations, document control, sustainability coordination and customer support.</p>
+        </div>
+
+        <div class="bento">
+          <article class="card bigstat reveal"><div class="number accent">2+</div><div class="card-title">Years at Dubai International Airport</div><p>Hands-on experience across cargo, customer service and administration.</p></article>
+          <article class="card bigstat reveal"><div class="number">5</div><div class="card-title">Languages</div><p>English, Hindi, Urdu, Kannada and Tulu.</p></article>
+          <article class="card bigstat reveal"><div class="number accent">MBA</div><div class="card-title">Business Administration</div><p>Currently pursuing an MBA to build on a B.Com and practical operations experience.</p></article>
+          <article class="card wide reveal"><div class="mono accent">What I bring</div><div class="card-title" style="font-size:27px">A practical mix of organization, people skills, compliance awareness and digital tools.</div><p>I am comfortable maintaining compliance-grade records, resolving enquiries from airlines and freight forwarders, supporting reporting and coordinating between operations, warehouse and management teams.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="section-kicker mono">02 / Experience</div><h2>The work behind the title.</h2></div>
+          <p class="section-intro">Two roles at dnata, showing progression from cargo/customer-facing operations into broader administrative support.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="job reveal">
+            <div class="job-dot"></div>
+            <div class="card job-card">
+              <div class="job-top">
+                <div><div class="mono accent">2025 — PRESENT</div><h3>Administrative Assistant</h3><div class="muted">dnata (Emirates Group) · Dubai International Airport</div></div>
+                <div class="date mono">CURRENT ROLE</div>
+              </div>
+              <ul>
+                <li>Manage document archiving for cargo and operational records, keeping filing systems organised and audit-ready.</li>
+                <li>Support environmental and sustainability initiatives, including record-keeping tied to reporting and compliance.</li>
+                <li>Handle enquiries from airlines, freight forwarders and internal teams, routing requests to the right department.</li>
+                <li>Provide administrative support across correspondence, scheduling and coordination between operations, warehouse and management.</li>
+                <li>Maintain accurate data entry across internal systems to support reporting for supervisors and department heads.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="job reveal">
+            <div class="job-dot"></div>
+            <div class="card job-card">
+              <div class="job-top">
+                <div><div class="mono accent">2024 — 2025</div><h3>Cargo & Customer Service Agent</h3><div class="muted">dnata (Emirates Group) · Dubai International Airport</div></div>
+                <div class="date mono">PREVIOUS ROLE</div>
+              </div>
+              <ul>
+                <li>Served as a main point of contact for international airlines, freight forwarders and multinational clients, managing import/export cargo enquiries end to end.</li>
+                <li>Maintained compliance-grade records for AWB, Dangerous Goods, Pharmaceutical and AVI/HUM shipments in line with IATA and GCAA standards.</li>
+                <li>Prepared billing reports, invoices and inventory trackers for management review.</li>
+                <li>Guided customers through the Calogi digital platform, helping reduce repeat queries.</li>
+                <li>Carried out ULD build-up and breakdown with attention to load integrity, weight compliance and safety protocols.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="section-kicker mono">03 / Operations</div><h2>Where my experience connects.</h2></div>
+          <p class="section-intro">An interactive view of the environments I work across — from customer requests to documentation, coordination and reporting.</p>
+        </div>
+        <div class="ops">
+          <article class="card ops-copy reveal">
+            <div><div class="mono accent">AIRPORT OPERATIONS</div><h3 style="font-size:38px;letter-spacing:-.06em;margin:16px 0">Keep information moving.</h3><p>In a fast-paced airport environment, accuracy and coordination matter as much as speed. My experience sits at the intersection of people, documents, cargo and internal systems.</p></div>
+            <div class="tags"><span class="tag">Cargo</span><span class="tag">Documentation</span><span class="tag">Customer Coordination</span><span class="tag">Compliance</span><span class="tag">Reporting</span></div>
+          </article>
+          <article class="card ops-map reveal">
+            <div class="orbit"></div><div class="orbit two"></div>
+            <div class="node n1"><b>CORE</b>Operations</div>
+            <div class="node n2"><b>01</b>Documentation</div>
+            <div class="node n3"><b>02</b>Customer</div>
+            <div class="node n4"><b>03</b>Reporting</div>
+            <div class="node n5"><b>04</b>Compliance</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="section-kicker mono">04 / Capabilities</div><h2>Tools for the real world.</h2></div>
+          <p class="section-intro">No invented percentages — just the skills and software actually listed in my experience and CV.</p>
+        </div>
+        <div class="skills">
+          <article class="card skill reveal"><div class="mono accent">01</div><h3>Administration</h3><p>Document control, archiving, scheduling, correspondence, coordination and data entry.</p><div class="tags"><span class="tag">Document Control</span><span class="tag">Reporting</span><span class="tag">Coordination</span></div></article>
+          <article class="card skill reveal"><div class="mono accent">02</div><h3>Customer Service</h3><p>Enquiries from airlines, freight forwarders, internal teams and multinational clients.</p><div class="tags"><span class="tag">Problem Solving</span><span class="tag">Calogi</span><span class="tag">Communication</span></div></article>
+          <article class="card skill reveal"><div class="mono accent">03</div><h3>Digital Tools</h3><p>Business productivity and reporting tools used across administration and operations.</p><div class="tags"><span class="tag">Microsoft 365</span><span class="tag">Power BI</span><span class="tag">One Cargo</span></div></article>
+          <article class="card skill reveal"><div class="mono accent">04</div><h3>AI & Prompting</h3><p>AI prompt engineering developed through the Dubai Future Foundation's One Million Prompters program.</p><div class="tags"><span class="tag">Prompt Engineering</span><span class="tag">AI</span></div></article>
+          <article class="card skill reveal"><div class="mono accent">05</div><h3>Sustainability</h3><p>Departmental sustainability support, record-keeping and coordination tied to reporting and compliance.</p><div class="tags"><span class="tag">Sustainability</span><span class="tag">Records</span></div></article>
+          <article class="card skill reveal"><div class="mono accent">06</div><h3>Cargo Operations</h3><p>Import/export cargo enquiries, AWB and shipment documentation, ULD build-up/breakdown and safety awareness.</p><div class="tags"><span class="tag">Cargo</span><span class="tag">Dangerous Goods</span><span class="tag">ULD</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="section-kicker mono">05 / Education</div><h2>Learning while working.</h2></div>
+          <p class="section-intro">A business foundation, now extended with postgraduate study and practical digital learning.</p>
+        </div>
+        <div class="education">
+          <article class="card edu reveal">
+            <div class="year">CURRENTLY PURSUING</div>
+            <h3>MBA — Business Administration</h3>
+            <p class="muted">Postgraduate business studies currently in progress.</p>
+          </article>
+          <article class="card edu reveal">
+            <div class="year">2021 — 2024</div>
+            <h3>Bachelor of Commerce (B.Com)</h3>
+            <p class="muted">Business Management · Mangalore University, India</p>
+          </article>
+        </div>
+
+        <div style="height:14px"></div>
+        <article class="card reveal">
+          <div class="mono accent">CERTIFICATIONS & TRAINING</div>
+          <div class="certs">
+            <div class="cert">One Million Prompters — AI Prompt Engineering · Dubai Future Foundation / DCAI</div>
+            <div class="cert">Emirates Aviation Dangerous Goods Handling — dnata (Emirates Group)</div>
+            <div class="cert">Cargo Product Knowledge & Documentation — dnata (Emirates Group)</div>
+            <div class="cert">Fundamentals of Cargo Operations (Export) — dnata (Emirates Group)</div>
+            <div class="cert">dnata Customer Service — dnata (Emirates Group)</div>
+            <div class="cert">Microsoft 365 — Word, Excel, PowerPoint, Outlook</div>
+            <div class="cert">Power BI · One Cargo · Calogi</div>
+            <div class="cert">UAE Driving Licence</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="section-kicker mono">06 / Languages</div><h2>Communication without borders.</h2></div>
+        </div>
+        <div class="languages">
+          <div class="lang reveal"><span>01</span><strong>English</strong><span>Language</span></div>
+          <div class="lang reveal"><span>02</span><strong>Hindi</strong><span>Language</span></div>
+          <div class="lang reveal"><span>03</span><strong>Urdu</strong><span>Language</span></div>
+          <div class="lang reveal"><span>04</span><strong>Kannada</strong><span>Language</span></div>
+          <div class="lang reveal"><span>05</span><strong>Tulu</strong><span>Language</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <div class="contact-box reveal">
+          <div class="mono accent">07 / Contact</div>
+          <h2>Let's build the next chapter.</h2>
+          <p class="hero-sub" style="max-width:700px">For opportunities in administration, operations, customer service, aviation or business — I'd be happy to connect.</p>
+          <div class="contact-links">
+            <a class="pill primary magnetic" href="mailto:mohdabzan2003@gmail.com">mohdabzan2003@gmail.com ↗</a>
+            <a class="pill magnetic" href="https://www.linkedin.com/in/mohdabzan" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a class="pill magnetic" href="tel:+971565754523">+971 56 575 4523</a>
+            <a class="pill magnetic" href="assets/Abzan_Resume.pdf" target="_blank" rel="noopener">Open CV ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div>© <span id="year"></span> Mohammed Abzan</div>
+      <div>Dubai, UAE · Administration × Operations × Business</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Scroll progress
+    const progress = document.querySelector('.progress');
+    addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = (scrollY / h * 100) + '%';
+    }, {passive:true});
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Cursor
+    const cursor = document.querySelector('.cursor'), ring = document.querySelector('.cursor-ring');
+    let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+    addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+    function cursorLoop(){ rx += (mx-rx)*.15; ry += (my-ry)*.15; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(cursorLoop); }
+    cursorLoop();
+    document.querySelectorAll('a,button,.card').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{cursor.classList.add('hover');ring.classList.add('hover')});
+      el.addEventListener('mouseleave',()=>{cursor.classList.remove('hover');ring.classList.remove('hover')});
+    });
+
+    // Magnetic buttons
+    if(!reduceMotion){
+      document.querySelectorAll('.magnetic').forEach(el=>{
+        el.addEventListener('mousemove', e=>{
+          const r=el.getBoundingClientRect(), x=e.clientX-r.left-r.width/2, y=e.clientY-r.top-r.height/2;
+          el.style.transform=`translate(${x*.12}px,${y*.12}px)`;
+        });
+        el.addEventListener('mouseleave',()=>el.style.transform='');
+      });
+    }
+
+    // GSAP reveal
+    if(window.gsap && !reduceMotion){
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.utils.toArray('.reveal').forEach((el,i)=>{
+        gsap.fromTo(el,{autoAlpha:0,y:35},{autoAlpha:1,y:0,duration:.8,ease:'power3.out',delay:(i%3)*.03,scrollTrigger:{trigger:el,start:'top 88%',once:true}});
+      });
+      gsap.from('.hero h1',{y:70,opacity:0,duration:1.15,ease:'power4.out',delay:.15});
+    } else document.querySelectorAll('.reveal').forEach(el=>{el.style.opacity=1;el.style.transform='none'});
+
+    // Lightweight Three.js background: particles + slow field, intentionally subtle for performance.
+    if(window.THREE && !reduceMotion){
+      const mount=document.getElementById('scene');
+      const scene=new THREE.Scene();
+      const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,.1,100);
+      camera.position.z=8;
+      const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'high-performance'});
+      renderer.setPixelRatio(Math.min(devicePixelRatio,1.5)); renderer.setSize(innerWidth,innerHeight); mount.appendChild(renderer.domElement);
+
+      const count=850, pos=new Float32Array(count*3);
+      for(let i=0;i<count;i++){
+        const r=THREE.MathUtils.randFloat(2.5,8), a=Math.random()*Math.PI*2, z=THREE.MathUtils.randFloatSpread(5);
+        pos[i*3]=Math.cos(a)*r; pos[i*3+1]=Math.sin(a)*r*.55; pos[i*3+2]=z;
+      }
+      const geo=new THREE.BufferGeometry(); geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+      const mat=new THREE.PointsMaterial({color:0xb9ff4a,size:.018,transparent:true,opacity:.55});
+      const points=new THREE.Points(geo,mat); scene.add(points);
+
+      const ringGeo=new THREE.TorusGeometry(2.2,.008,8,180);
+      const ringMat=new THREE.MeshBasicMaterial({color:0xb9ff4a,transparent:true,opacity:.12});
+      const torus=new THREE.Mesh(ringGeo,ringMat); torus.rotation.x=Math.PI*.25; scene.add(torus);
+
+      let tx=0,ty=0;
+      addEventListener('mousemove',e=>{tx=(e.clientX/innerWidth-.5)*.7;ty=(e.clientY/innerHeight-.5)*.4});
+      function animate(t){
+        points.rotation.y=t*.000035+tx*.08; points.rotation.x=ty*.04;
+        torus.rotation.z=t*.00012; torus.rotation.y=t*.00008;
+        camera.position.x += (tx-camera.position.x)*.015;
+        camera.position.y += (-ty-camera.position.y)*.015;
+        camera.lookAt(0,0,0); renderer.render(scene,camera); requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+      addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+    }
+
+    // Simple mobile menu
+    const menu=document.querySelector('.menu'), links=document.querySelector('.navlinks');
+    menu?.addEventListener('click',()=>{links.style.display=links.style.display==='flex'?'none':'flex';links.style.position='absolute';links.style.top='70px';links.style.left='10px';links.style.right='10px';links.style.padding='18px';links.style.background='rgba(8,9,9,.95)';links.style.border='1px solid var(--line)';links.style.borderRadius='16px';links.style.flexDirection='column'});
+  </script>
+</body>
+</html>
